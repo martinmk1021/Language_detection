@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[8]:
 
 
 from flask import Flask, request, jsonify, render_template
@@ -16,8 +16,9 @@ app = Flask(__name__)
 
 # Function to clean the input text
 def clean_text(text):
-    # Remove numbers and special characters, keeping only letters and spaces
-    cleaned_text = re.sub(r'[^a-zA-Z\s]', '', text)
+    # Remove numbers and special characters, keeping letters from all languages
+    cleaned_text = re.sub(r'[^\w\s]', '', text)  # Remove special characters
+    cleaned_text = re.sub(r'\d+', '', cleaned_text)  # Remove digits
     return cleaned_text.strip()  # Remove leading/trailing whitespace
 
 @app.route('/')
